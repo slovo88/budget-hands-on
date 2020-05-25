@@ -1,0 +1,25 @@
+{
+  "name": "budget-hands-on",
+  "version": "0.0.0",
+  "description": "Project to move my current budget and net worth tracking into a  modern looking app with charts. Also to practice some backend  coding, since it has been a long time since I've touched it.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slovo88/budget-hands-on.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slovo88/budget-hands-on/issues"
+  },
+  "homepage": "https://github.com/slovo88/budget-hands-on#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
