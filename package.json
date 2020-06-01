@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "heroku-postbuild": "cd client && yarn && yarn run build",
+    "b": "cd client && yarn build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/slovo88/budget-hands-on#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
   }
 }
