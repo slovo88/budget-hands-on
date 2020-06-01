@@ -29,14 +29,15 @@ router.post('/:userId/', (req, res) => {
 
   // TODO: check for authorized access
 
-  const transactionsWithUserId = Object.assign({ userId }, transactions)
-  
   connection.query(
-    'INSERT INTO transactions (userId, year, month, day, category, amount, description, note) VALUES ?',
-    [transactionsWithUserId.map((transaction) => Object.values(transaction))],
-    (errors, results, fields) => {
+    'INSERT INTO transactions (userId, year, month, day, description, category, amount, note) VALUES ?',
+    [transactions.map((transaction) => {
+      const transactionWithUserId = Object.assign({ userId }, transaction)
+      return Object.values(transactionWithUserId)
+    })],
+    (errors) => {
       if (errors) res.status(503).send({ errors })
-      else res.status(201).send({ errors, results, fields })
+      else res.status(201).send()
     }
   )
 })
@@ -50,13 +51,17 @@ router.put('/:userId/', (req, res) => {
     amount,
     description,
     note,
+    field,
+    value,
   }  = req.body.transaction
 
   // TODO: check for authorized access
 
+  console.log({field, value, _id})
+
   connection.query(
-    'UPDATE transactions SET description = ? WHERE _id = ?', // placeholder until tested, then the other columns need to be added
-    [description, _id],
+    'UPDATE transactions SET ?? = ? WHERE _id = ?', // placeholder until tested, then the other columns need to be added
+    [field, value, _id],
     (errors, results) => {
       if (errors) res.status(503).send({ errors })
       else res.send({ results })
