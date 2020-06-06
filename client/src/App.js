@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Breakdown from './components/breakdown/Breakdown'
@@ -156,7 +156,7 @@ function App() {
 
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

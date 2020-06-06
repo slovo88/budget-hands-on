@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import TransactionTable from '../transactions/TransactionTable'
 
 export default function Breakdown() {
@@ -25,7 +26,9 @@ export default function Breakdown() {
       <h1>Budget Breakdown</h1>
 
       {transactions.length 
-        ? <TransactionTable transactions={transactions} onTableRowClick={onTableRowClickBreakdown} />
+        ? <TransactionTable transactions={transactions} onTableRowClick={onTableRowClickBreakdown}>
+            <Link to="add-transactions">Add transactions</Link>
+          </TransactionTable>
         : <p>There are no transactions to show at this time.</p>
       }
     </main>

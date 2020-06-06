@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React from 'react'
 import Wrapper from '../shared/Wrapper'
 
-export default function TransactionTable({ transactions = [], onTableRowClick }) {
+export default function TransactionTable({ transactions = [], onTableRowClick, children }) {
 
   return (
     <Wrapper>
       <h2>Transactions</h2>
-      <Link to="add-transactions">Add transactions</Link>
+
+      {children}
 
       <table>
         <thead>
@@ -19,10 +19,10 @@ export default function TransactionTable({ transactions = [], onTableRowClick })
           </tr>
         </thead>
         <tbody>
-          {transactions.map(({ _id, year, month, day, description, category, amount }) => {
+          {transactions.map(({ _id, year, month, day, description, category, amount }, index) => {
             return (
-              <tr key={_id} onClick={() => {
-                onTableRowClick(_id)
+              <tr key={_id || index} onClick={() => {
+                onTableRowClick(_id || index)
               }}>
                 <td>{`${year}/${month}/${day}`}</td>
                 <td>{description}</td>
