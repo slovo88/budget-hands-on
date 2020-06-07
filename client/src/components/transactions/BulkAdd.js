@@ -27,8 +27,7 @@ export default function BulkAdd() {
       const category = data.get('category')
   
       const [ month, day, year ] = date.split('/')
-  
-      const newArr = newTransactions.concat({ year, month, day, description, category, amount })
+      const newArr = newTransactions.concat({ year, month, day, description, category, amount, note: '' })
   
       setNewTransactions(newArr)
       
@@ -39,16 +38,31 @@ export default function BulkAdd() {
     setTimeout(() => { target.querySelector('input').focus() }, 0)
   }
 
+  const saveTransactions = (e) => {
+    const body = JSON.stringify({
+      transactions: newTransactions
+    })
+
+    fetch('/api/transactions/1234', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+    }).then(setNewTransactions([]))
+  }
+
   return (
     <Wrapper>
       <h1>Add Transactions</h1>
-      {console.log('render bulk add')}
 
       <AddTransactionForm onTransactionSubmission={onTransactionSubmission} />
 
       {newTransactions.length > 0 &&
         <TransactionTable transactions={newTransactions} onTableRowClick={onTableRowClickBulkAdd}>
-          <button>Save Transactions</button>
+          <button onClick={saveTransactions}>
+            Save Transactions
+          </button>
         </TransactionTable>
       }
     </Wrapper>

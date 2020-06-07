@@ -24,7 +24,7 @@ export default function TransactionTable({ transactions = [], onTableRowClick, c
               <tr key={_id || index} onClick={() => {
                 onTableRowClick(_id || index)
               }}>
-                <td>{`${year}/${month}/${day}`}</td>
+                <td>{`${month}/${day}/${year}`}</td>
                 <td>{description}</td>
                 <td>{category}</td>
                 <td>{amount}</td>
