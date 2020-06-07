@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import TransactionTable from '../transactions/TransactionTable'
+import modalStore from '../../stores/modalStore'
+import TransactionDetailsModal from '../transactions/TransactionDetailsModal'
 
 export default function Breakdown() {
   const [transactions, setTransactions] = useState([])
@@ -10,8 +12,16 @@ export default function Breakdown() {
   }
 
   const onTableRowClickBreakdown = (transactionId) => {
-    // TODO: create modal, pass transaction ID to modal for details
-    console.log({ transactionId })
+    modalStore.dispatch({ 
+      type: 'MODAL_OPEN',
+      payload: {
+        modalComponent: TransactionDetailsModal,
+        modalProps: {
+          _id: transactionId,
+          transaction: transactions.find((transaction) => transaction._id === transactionId)
+        } 
+      }
+    })
   }
 
   useEffect(() => {

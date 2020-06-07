@@ -7,9 +7,9 @@ export default function Nav() {
       Navigation
 
       <ul>
-        <li>
+        {/* <li>
           <NavLink activeStyle={{fontWeight:'bold'}} to="/" exact>Dashboard</NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink activeStyle={{fontWeight:'bold'}} to="/add-transactions">Add Transactions</NavLink>
         </li>

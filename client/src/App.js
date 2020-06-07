@@ -1,14 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Breakdown from './components/breakdown/Breakdown'
 import BulkAdd from './components/transactions/BulkAdd'
 import Nav from './components/nav/Nav'
 import Snapshot from './components/snapshot/Snapshot'
+import modalStore from './stores/modalStore'
 
 import './App.css'
 
 function App() {
+  const [ modalSettings, setModalSettings ] = useState({ 
+    modalOpen: false, modalComponent: null, modalProps: {} 
+  })
+
+  modalStore.subscribe(() => {
+    setModalSettings(modalStore.getState())
+  })
+
+  // TODO: move into separate component
+  const closeModal = (e) => {
+    modalStore.dispatch({ type: 'MODAL_CLOSE' })
+  }
+
+  const stopProp = (e) => {
+    e.stopPropagation()
+  }
+
+  // TODO: refine and move to css file
+  const fullPage = {
+    position: 'absolute',
+    width: '100vw',
+    height: '100vh',
+    background: 'rgb(0, 0, 0, 0.7'
+  }
+
   // const get = () => {
   //   fetch('/api/transactions/1234/2020').then((a) => a.json()).then(data => setTransactionsList(data.transactions))
   // }
@@ -73,16 +99,22 @@ function App() {
 
   return (
     <Router>
-      <div id="modal-wrapper">
 
-      </div>
+      {modalSettings.modalOpen && 
+        // TODO: move to component, refine styling and move to css
+        <div style={fullPage} id="modal-wrapper" onClick={closeModal}>
+          <div onClick={stopProp} style={{ position: 'relative', backgroundColor: 'white', width: '30%', padding: '50px', margin: 'auto', top: '35vh' }}>
+            <modalSettings.modalComponent {...modalSettings.modalProps}/>
+          </div>
+        </div>
+      }
 
       <div className="App">
         <Nav />
 
         <Route path="/add-transactions" component={BulkAdd} />
         <Route path="/breakdown" component={Breakdown} />
-        <Route path="/" component={Snapshot} exact />
+        <Route path="/" component={Breakdown} exact />
 
 
 

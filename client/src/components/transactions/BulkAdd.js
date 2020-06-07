@@ -2,13 +2,24 @@ import React, { useState } from 'react'
 import TransactionTable from './TransactionTable'
 import Wrapper from '../shared/Wrapper'
 import AddTransactionForm from './AddTransactionForm'
+import TransactionDetailsModal from './TransactionDetailsModal'
+import modalStore from '../../stores/modalStore'
 
 export default function BulkAdd() {
 
   const [ newTransactions, setNewTransactions ] = useState([])
 
-  const onTableRowClickBulkAdd = (transactionId) => {
-    console.log({ transactionId })
+  const onTableRowClickBulkAdd = (transactionIndex) => {
+    modalStore.dispatch({ 
+      type: 'MODAL_OPEN',
+      payload: {
+        modalComponent: TransactionDetailsModal,
+        modalProps: {
+          _id: transactionIndex,
+          transaction: newTransactions[transactionIndex]
+        } 
+      }
+    })
   }
 
   const onTransactionSubmission = (e) => {
