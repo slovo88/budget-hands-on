@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Breakdown from './components/breakdown/Breakdown'
 import BulkAdd from './components/transactions/BulkAdd'
 import Nav from './components/nav/Nav'
-import Snapshot from './components/snapshot/Snapshot'
+// import Snapshot from './components/snapshot/Snapshot'
 import modalStore from './stores/modalStore'
 
 import './App.css'
