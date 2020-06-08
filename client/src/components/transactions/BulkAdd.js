@@ -4,6 +4,7 @@ import Wrapper from '../shared/Wrapper'
 import AddTransactionForm from './AddTransactionForm'
 import TransactionDetailsModal from './TransactionDetailsModal'
 import modalStore from '../../stores/modalStore'
+import transactionStore from '../../stores/transactionsStore'
 
 export default function BulkAdd() {
 
@@ -50,6 +51,7 @@ export default function BulkAdd() {
   }
 
   const saveTransactions = (e) => {
+    // TODO: implement loading state on submission
     const body = JSON.stringify({
       transactions: newTransactions
     })
@@ -60,7 +62,35 @@ export default function BulkAdd() {
         'Content-Type': 'application/json',
       },
       body,
-    }).then(setNewTransactions([]))
+    }).then(() => {
+      const impactedDates = 
+        newTransactions.length === 1 ?
+        
+        [{ year: newTransactions[0].year, month: newTransactions[0].month }] :
+        
+        newTransactions.reduce((acc, { month, year }) => {
+        const accumulatedArray = !Array.isArray(acc) ? [] : acc
+
+        if (!Array.isArray(acc)) {
+          const { month, year } = acc
+          accumulatedArray.push({ month, year })
+        }
+        
+        if (!accumulatedArray.some((dateItem) => dateItem.month === month && dateItem.year === year)) {  
+          accumulatedArray.push({ month, year })
+        }
+
+        return accumulatedArray
+      })
+
+      transactionStore.dispatch({
+        type: 'TRANSACTIONS_ADD',
+        payload: {
+          impactedDates,
+        }
+      })
+      setNewTransactions([])
+    })
   }
 
   return (

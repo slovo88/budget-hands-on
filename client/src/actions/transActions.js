@@ -6,11 +6,10 @@ export const TRANSACTIONS_GET = ({ year, month }) => ({
   },
 })
 
-export const TRANSACTIONS_ADD = ({ year, month }) => ({
+export const TRANSACTIONS_ADD = ({ impactedDates }) => ({
   type: 'TRANSACTIONS_ADD',
   payload: {
-    year,
-    month,
+    impactedDates,
   }
 })
 

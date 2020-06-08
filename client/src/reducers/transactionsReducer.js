@@ -59,11 +59,24 @@ export default function transactionsReducer(state = {}, action) {
         [yearKey]: yearObj
       }
     case 'TRANSACTIONS_ADD':
-      const { monthsImpacted, yearsImpacted } = action.payload
+      const { impactedDates } = action.payload
+      let updatedState = state
+      // flag status as stale for impacted years/months
+      impactedDates.forEach(({ month, year }) => {
+        const yearKey = `year${year}`
+        updatedState = {
+          ...updatedState, 
+          [yearKey]: {
+            ...updatedState[yearKey],
+            isStale: true,
+            [`month${month}`]: {
+              isStale: true,
+            }
+          }
+        }
+      })
 
-      // flag status as stale` for impacted years/months
-
-      return state
+      return updatedState
     case 'TRANSACTION_EDIT':
       const { updatedTransaction } = action.payload
       // edit transaction locally - data doesn't need to be considered stale

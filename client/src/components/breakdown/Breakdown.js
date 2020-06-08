@@ -14,7 +14,9 @@ export default function Breakdown() {
   const [ currentBreakdownView, setCurrentBreakdownView ] = useState({ view: 'year', year: 2020 })
 
   const getTransactions = ({ view, year, month }) => {
-    // TODO: check if redux already has necessary data
+    // TODO: implement loading state
+    
+    // check if redux already has necessary data
     const storedTransactions = transactionsStore.getState()
     let hasCurrentData = false
     
