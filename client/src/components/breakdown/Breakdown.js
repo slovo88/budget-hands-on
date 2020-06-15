@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import TransactionTable from '../transactions/TransactionTable'
 import modalStore from '../../stores/modalStore'
 import transactionsStore from '../../stores/transactionsStore'
+import breakdownStore from '../../stores/breakdownStore'
 import TransactionDetailsModal from '../transactions/TransactionDetailsModal'
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -11,11 +12,12 @@ export default function Breakdown() {
   const [ arrayOfYearsFrom2020, setArrayOfYears ] = useState([])
 
   const [ transactions, setTransactions ] = useState([])
+  const [ pools, setPools ] = useState({})
   const [ currentBreakdownView, setCurrentBreakdownView ] = useState({ view: 'year', year: 2020 })
 
   const getTransactions = ({ view, year, month }) => {
     // TODO: implement loading state
-    
+
     // check if redux already has necessary data
     const storedTransactions = transactionsStore.getState()
     let hasCurrentData = false
@@ -25,7 +27,10 @@ export default function Breakdown() {
       hasCurrentData = storedTransactions[`year${year}`] && storedTransactions[`year${year}`].isStale !== undefined && !storedTransactions[`year${year}`].isStale
       
       if (hasCurrentData) {
-        setTransactions(storedTransactions[`year${year}`].transactions)
+        const transactions = storedTransactions[`year${year}`].transactions
+
+        setTransactions(transactions)
+        getBreakdown(view, year, month, transactions)
       }
       
     } else if (view === 'month') {
@@ -33,7 +38,10 @@ export default function Breakdown() {
       hasCurrentData = storedTransactions[`year${year}`] && storedTransactions[`year${year}`][`month${month}`] && storedTransactions[`year${year}`][`month${month}`].isStale !== undefined && !storedTransactions[`year${year}`][`month${month}`].isStale
       
       if (hasCurrentData) {
-        setTransactions(storedTransactions[`year${year}`][`month${month}`].transactions)
+        const transactions = storedTransactions[`year${year}`][`month${month}`].transactions
+
+        setTransactions(transactions)
+        getBreakdown(view, year, month, transactions)
       }
     }
   
@@ -50,6 +58,52 @@ export default function Breakdown() {
             },
           })
           setTransactions(transactions)
+          getBreakdown(view, year, month, transactions, true)
+        })
+    }
+  }
+
+
+  const getBreakdown = (view, year, month, transactions, forceRecalc) => {
+    // TODO: implement loading state
+
+    // check if redux already has necessary data
+    const storedBreakdownCalc = breakdownStore.getState()
+    let hasCurrentData = false
+    
+    // if year view, check store queryStatus for the year
+    if (view === 'year') {
+      hasCurrentData = storedBreakdownCalc[`bd${year}`] !== undefined
+      
+      if (hasCurrentData) {
+        setPools(storedBreakdownCalc[`bd${year}`])
+      }
+      
+    } else if (view === 'month') {
+      // if month view, check store queryStatus for the month
+      hasCurrentData = storedBreakdownCalc[`bd${year}${month}`] !== undefined
+      
+      if (hasCurrentData) {
+        setPools(storedBreakdownCalc[`bd${year}${month}`])
+      }
+    }
+
+    // TODO: don't make call and just force recalc if pools have been fetched for year
+    if (!hasCurrentData || forceRecalc) {
+      const monthString = view === 'month' ? month : ''
+
+      fetch(`/api/breakdown/1234/${year}`).then((response) => response.json())
+        .then((pools) => {
+          breakdownStore.dispatch({
+            type: 'BREAKDOWN_CALCULATE',
+            payload: {
+              year,
+              month: monthString,
+              transactions,
+              pools,
+            },
+          })
+          getBreakdown(view, year, month, transactions)
         })
     }
   }

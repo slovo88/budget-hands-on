@@ -35,7 +35,7 @@ router.get('/:userId/:year', (req, res) => {
           response[pool].pool.push({ category, target })
         })
         
-        res.send({ response }) 
+        res.send(response) 
       }
     }
   )
