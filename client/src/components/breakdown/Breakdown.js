@@ -188,6 +188,81 @@ export default function Breakdown() {
         : <p>{arrayOfYearsFrom2020[0]}</p>
       }
 
+      {pools.monthlyPool && 
+        <table>
+          <thead>
+            <tr>
+              <td>Category</td>
+              <td>Budget</td>
+              <td>Spent</td>
+              <td>Net</td>
+            </tr>
+          </thead>
+          <tbody>
+            {pools.monthlyPool.map(({ category, target, spent, remaining, }) => {
+              return (
+                <tr key={category}>
+                  <td>{category}</td>
+                  <td>{target}</td>
+                  <td>{spent}</td>
+                  <td>{remaining}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      }
+
+      {pools.annualPool && 
+        <table>
+          <thead>
+            <tr>
+              <td>Category</td>
+              <td>Budget</td>
+              <td>Spent</td>
+              <td>Net</td>
+            </tr>
+          </thead>
+          <tbody>
+            {pools.annualPool.map(({ category, target, spent, remaining, }) => {
+              return (
+                <tr key={category}>
+                  <td>{category}</td>
+                  <td>{target}</td>
+                  <td>{spent}</td>
+                  <td>{remaining}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      }
+
+      {pools.incomePool && 
+        <table>
+          <thead>
+            <tr>
+              <td>Category</td>
+              <td>Budget</td>
+              <td>Spent</td>
+              <td>Net</td>
+            </tr>
+          </thead>
+          <tbody>
+            {pools.incomePool.map(({ category, target, spent, remaining, }) => {
+              return (
+                <tr key={category}>
+                  <td>{category}</td>
+                  <td>{target}</td>
+                  <td>{spent}</td>
+                  <td>{remaining}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      }
+
       {transactions.length 
         ? <TransactionTable transactions={transactions} onTableRowClick={onTableRowClickBreakdown}>
             <Link to="add-transactions">Add transactions</Link>

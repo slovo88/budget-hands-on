@@ -67,15 +67,25 @@ function App() {
 
   // const edit = (e) => {
   //   e.preventDefault()
-  //   const _id = document.getElementById('edit-id').value
-  //   const field = document.getElementById('edit-field').value
-  //   const value = document.getElementById('edit-value').value
+  //   const _id = parseInt(document.getElementById('edit-id').value)
+  //   const year = parseInt(document.getElementById('edit-year').value)
+  //   const month = parseInt(document.getElementById('edit-month').value)
+  //   const day = parseInt(document.getElementById('edit-day').value)
+  //   const description = document.getElementById('edit-description').value
+  //   const amount = parseFloat(document.getElementById('edit-amount').value)
+  //   const category = document.getElementById('edit-category').value
+  //   const note = document.getElementById('edit-note').value
 
   //   const body = JSON.stringify({
   //     transaction: {
   //       _id,
-  //       field,
-  //       value,
+  //       year,
+  //       month,
+  //       day,
+  //       description,
+  //       amount,
+  //       category,
+  //       note,
   //     }
   //   })
 
@@ -85,7 +95,7 @@ function App() {
   //       'Content-Type': 'application/json',
   //     },
   //     body,
-  //   }).then(get) 
+  //   }).then(console.log) 
   // }
 
   // const doDelete = (e) => {
@@ -148,9 +158,9 @@ function App() {
               })}
             </tbody>
           </table>
-        </div>
+        </div> */}
       
-        <div>
+        {/* <div>
           <h2>Add</h2>
           <form>
             <label for="add-date">Date</label>
@@ -158,25 +168,40 @@ function App() {
 
             <button onClick={add}>add</button>
           </form>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <h2>Edit</h2>
           <form>
             <label for="edit-id">id</label>
             <input id="edit-id" name="edit-id" type="text"/>
 
-            <label for="edit-field">field</label>
-            <input id="edit-field" name="edit-field" type="text"/>
+            <label for="edit-year">year</label>
+            <input id="edit-year" name="edit-year" type="text"/>
 
-            <label for="edit-value">value</label>
-            <input id="edit-value" name="edit-value" type="text"/>
+            <label for="edit-month">month</label>
+            <input id="edit-month" name="edit-month" type="text"/>
+
+            <label for="edit-day">day</label>
+            <input id="edit-day" name="edit-day" type="text"/>
+
+            <label for="edit-description">description</label>
+            <input id="edit-description" name="edit-description" type="text"/>
+
+            <label for="edit-amount">amount</label>
+            <input id="edit-amount" name="edit-amount" type="text"/>
+
+            <label for="edit-category">category</label>
+            <input id="edit-category" name="edit-category" type="text"/>
+
+            <label for="edit-note">note</label>
+            <input id="edit-note" name="edit-note" type="text"/>
             
             <button onClick={edit}>edit</button>
           </form>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <h2>Delete</h2>
           <form>
             <label for="delete-id">id</label>
