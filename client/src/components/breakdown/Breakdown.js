@@ -235,6 +235,14 @@ export default function Breakdown() {
                 )
               })}
             </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td>{pools.monthlyPool.reduce((acc, { target })=> acc + parseFloat(target), 0).toFixed(2)}</td>
+                <td>{pools.monthlyPool.reduce((acc, { spent })=> acc + parseFloat(spent), 0).toFixed(2)}</td>
+                <td>{pools.monthlyPool.reduce((acc, { remaining })=> acc + parseFloat(remaining), 0).toFixed(2)}</td>
+              </tr>
+            </tfoot>
           </table>
         }
 
@@ -260,6 +268,14 @@ export default function Breakdown() {
                 )
               })}
             </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td>{pools.annualPool.reduce((acc, { target })=> acc + parseFloat(target), 0).toFixed(2)}</td>
+                <td>{pools.annualPool.reduce((acc, { spent })=> acc + parseFloat(spent), 0).toFixed(2)}</td>
+                <td>{pools.annualPool.reduce((acc, { remaining })=> acc + parseFloat(remaining), 0).toFixed(2)}</td>
+              </tr>
+            </tfoot>
           </table>
         }
 
@@ -285,6 +301,14 @@ export default function Breakdown() {
                 )
               })}
             </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td>{pools.incomePool.reduce((acc, { target })=> acc + parseFloat(target), 0).toFixed(2)}</td>
+                <td>{pools.incomePool.reduce((acc, { spent })=> acc + parseFloat(spent), 0).toFixed(2)}</td>
+                <td>{pools.incomePool.reduce((acc, { remaining })=> acc + parseFloat(remaining), 0).toFixed(2)}</td>
+              </tr>
+            </tfoot>
           </table>
         }
       </Wrapper>
