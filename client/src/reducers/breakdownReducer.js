@@ -24,10 +24,11 @@ export default function breakdownReducer(state = {}, { type, payload }) {
         const spent = transactions
                         .filter((transaction) => transaction.category === lineItem.category)
                         .reduce((acc, transaction) => acc + transaction.amount, 0)
+                        .toFixed(2)
 
-        lineItem.target = isForYear ? lineItem.target * 12 : lineItem.target
+        lineItem.target = (isForYear ? lineItem.target * 12 : lineItem.target).toFixed(2)
 
-        const remaining = lineItem.target - spent
+        const remaining = (lineItem.target - spent).toFixed(2)
 
         
         return {
@@ -41,8 +42,9 @@ export default function breakdownReducer(state = {}, { type, payload }) {
         const spent = transactions
                         .filter((transaction) => transaction.category === lineItem.category)
                         .reduce((acc, transaction) => acc + transaction.amount, 0)
+                        .toFixed(2)
 
-        const remaining = lineItem.target - spent
+        const remaining = (lineItem.target - spent).toFixed(2)
 
         return {
           ...lineItem,
@@ -55,12 +57,13 @@ export default function breakdownReducer(state = {}, { type, payload }) {
         const spent = transactions
                         .filter((transaction) => transaction.category === lineItem.category)
                         .reduce((acc, transaction) => acc + transaction.amount, 0)
+                        .toFixed(2)
 
         // paychecks are biweekly, so I get 26 checks total
         const targetFactorial = lineItem.category === 'Paycheck' ? 13 : 12
-        lineItem.target = isForYear ? lineItem.target * targetFactorial : lineItem.target
+        lineItem.target = (isForYear ? lineItem.target * targetFactorial : lineItem.target).toFixed(2)
 
-        const remaining = lineItem.target - spent
+        const remaining = (lineItem.target - spent).toFixed(2)
 
         return {
           ...lineItem,

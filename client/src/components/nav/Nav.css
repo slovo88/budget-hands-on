@@ -1,0 +1,26 @@
+/* ul, li {
+  display: inline-block;
+}
+
+li {
+  list-style: none;
+} */
+
+.nav {
+  padding: 20px;
+  background-color: lightblue;
+}
+
+.nav, .nav ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav ul li {
+  list-style: none;
+  margin-left: 10px;
+}
+
+.nav li:first-of-type {
+  margin-left: none;
+}

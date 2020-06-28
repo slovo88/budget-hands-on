@@ -7,6 +7,7 @@ const defaultState = {
 export default function modalReducer(state = defaultState, { type, payload }) {
   switch (type) {
     case 'MODAL_OPEN':
+      document.body.style = "overflow: hidden;"
       const { modalComponent, modalProps, } = payload
     
       return {
@@ -15,6 +16,7 @@ export default function modalReducer(state = defaultState, { type, payload }) {
         modalProps,
       }
     case 'MODAL_CLOSE':
+      document.body.style = ""
       return defaultState
     default:
       return state

@@ -1,8 +1,10 @@
 import React from 'react'
 
-export default function Wrapper({children}) {
+import './Wrapper.css'
+
+export default function Wrapper({ className, children }) {
   return (
-    <section>
+    <section className={`${className} wrapper`}>
       {children}
     </section>
   )

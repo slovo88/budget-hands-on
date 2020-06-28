@@ -12,10 +12,10 @@ export default function TransactionTable({ transactions = [], onTableRowClick, c
       <table>
         <thead>
           <tr>
-            <td>Date</td>
-            <td>Description</td>
-            <td>Category</td>
-            <td>Amount</td>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Amount</th>
           </tr>
         </thead>
         <tbody>

@@ -1,10 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+import './Nav.css'
+
 export default function Nav() {
   return (
-    <nav>
-      Navigation
+    <nav className="nav">
+      
+      <p>Budget App</p>
 
       <ul>
         {/* <li>

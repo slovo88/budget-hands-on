@@ -29,7 +29,7 @@ function App() {
 
   // TODO: refine and move to css file
   const fullPage = {
-    position: 'absolute',
+    position: 'fixed',
     width: '100vw',
     height: '100vh',
     background: 'rgb(0, 0, 0, 0.7'

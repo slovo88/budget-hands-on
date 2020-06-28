@@ -1,0 +1,38 @@
+.breakdown-header, .breakdown-toggle, .breakdown-year, .breakdown-month {
+  display: inline-block;
+}
+
+.breakdown-header {
+  font-weight: bold;
+}
+
+.breakdown-toggle {
+  min-width: 75px;
+  background-color: white;
+  border: 1px solid black;
+  border-right: none;
+}
+
+.breakdown-toggle:last-of-type {
+  border-right: 1px solid black;
+  border-top-right-radius: 15px;
+}
+
+.breakdown-toggle:first-of-type {
+  border-top-left-radius: 15px;
+}
+
+.breakdown-toggle, .breakdown-header {
+  padding: 10px;
+  position: relative;
+  bottom: -1px;
+}
+
+.breakdown-toggle.active {
+  border-bottom: 1px solid white;
+  font-weight: bold;
+}
+
+.budget-breakdown {
+  margin-top: 0;
+}

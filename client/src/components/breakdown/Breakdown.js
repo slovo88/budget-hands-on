@@ -5,6 +5,9 @@ import modalStore from '../../stores/modalStore'
 import transactionsStore from '../../stores/transactionsStore'
 import breakdownStore from '../../stores/breakdownStore'
 import TransactionDetailsModal from '../transactions/TransactionDetailsModal'
+import Wrapper from '../shared/Wrapper'
+
+import './Breakdown.css'
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -157,111 +160,134 @@ export default function Breakdown() {
 
   return (
     <main>
-      <h1>Budget Breakdown</h1>
 
-      <button onClick={() => adjustBreakdownView('view', 'year')}>Show year</button>
-      <button onClick={() => adjustBreakdownView('view', 'month')}>Show month</button>
+      <h1 className="breakdown-header">
+        Breakdown by:
+      </h1>
+      <button 
+        className={`${currentBreakdownView.view === 'year' && 'active'} breakdown-toggle`}
+        onClick={() => adjustBreakdownView('view', 'year')}
+      >
+        Year
+      </button>
+      <button 
+        className={`${currentBreakdownView.view === 'month' && 'active'} breakdown-toggle`}
+        onClick={() => adjustBreakdownView('view', 'month')}
+      >
+        Month
+      </button>
 
-      {currentBreakdownView.view === 'month' &&
-        <select 
-          defaultValue={currentBreakdownView.month} 
-          onChange={(e) => adjustBreakdownView('month', parseInt(e.target.value))}
-        >
-          {monthNames.map((month, index) => {
-            const monthValue = index + 1
-            return <option key={month} value={monthValue}>{month}</option>
-          })}
-        </select>
-      }
-      
-      {arrayOfYearsFrom2020.length > 1
-        ? <select 
-            defaultValue={currentBreakdownView.year} 
-            onChange={(e) => adjustBreakdownView('year', parseInt(e.target.value))}
+      <Wrapper className="budget-breakdown">
+
+        <span>Breakdown for </span>
+
+        {currentBreakdownView.view === 'month' &&
+          <select 
+            className="breakdown-month"
+            defaultValue={currentBreakdownView.month} 
+            onChange={(e) => adjustBreakdownView('month', parseInt(e.target.value))}
           >
-            {arrayOfYearsFrom2020.map((year) => 
-              <option key={year} value={year}>
-                {year}
-              </option> 
-            )}
+            {monthNames.map((month, index) => {
+              const monthValue = index + 1
+              return <option key={month} value={monthValue}>{month}</option>
+            })}
           </select>
-        : <p>{arrayOfYearsFrom2020[0]}</p>
-      }
+        }
 
-      {pools.monthlyPool && 
-        <table>
-          <thead>
-            <tr>
-              <td>Category</td>
-              <td>Budget</td>
-              <td>Spent</td>
-              <td>Net</td>
-            </tr>
-          </thead>
-          <tbody>
-            {pools.monthlyPool.map(({ category, target, spent, remaining, }) => {
-              return (
-                <tr key={category}>
-                  <td>{category}</td>
-                  <td>{target}</td>
-                  <td>{spent}</td>
-                  <td>{remaining}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      }
+        {currentBreakdownView.view === 'month' && 
+          <span> of </span>
+        }
+        
+        {arrayOfYearsFrom2020.length > 1
+          ? <select 
+              className="breakdown-year"
+              defaultValue={currentBreakdownView.year} 
+              onChange={(e) => adjustBreakdownView('year', parseInt(e.target.value))}
+            >
+              {arrayOfYearsFrom2020.map((year) => 
+                <option key={year} value={year}>
+                  {year}
+                </option> 
+              )}
+            </select>
+          : <p className="breakdown-year">{arrayOfYearsFrom2020[0]}</p>
+        }
 
-      {pools.annualPool && 
-        <table>
-          <thead>
-            <tr>
-              <td>Category</td>
-              <td>Budget</td>
-              <td>Spent</td>
-              <td>Net</td>
-            </tr>
-          </thead>
-          <tbody>
-            {pools.annualPool.map(({ category, target, spent, remaining, }) => {
-              return (
-                <tr key={category}>
-                  <td>{category}</td>
-                  <td>{target}</td>
-                  <td>{spent}</td>
-                  <td>{remaining}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      }
+        {pools.monthlyPool && 
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Budget</th>
+                <th>Spent</th>
+                <th>Net</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pools.monthlyPool.map(({ category, target, spent, remaining, }) => {
+                return (
+                  <tr key={category}>
+                    <td>{category}</td>
+                    <td>{target}</td>
+                    <td>{spent}</td>
+                    <td>{remaining}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        }
 
-      {pools.incomePool && 
-        <table>
-          <thead>
-            <tr>
-              <td>Category</td>
-              <td>Budget</td>
-              <td>Spent</td>
-              <td>Net</td>
-            </tr>
-          </thead>
-          <tbody>
-            {pools.incomePool.map(({ category, target, spent, remaining, }) => {
-              return (
-                <tr key={category}>
-                  <td>{category}</td>
-                  <td>{target}</td>
-                  <td>{spent}</td>
-                  <td>{remaining}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      }
+        {pools.annualPool && 
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Budget</th>
+                <th>Spent</th>
+                <th>Net</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pools.annualPool.map(({ category, target, spent, remaining, }) => {
+                return (
+                  <tr key={category}>
+                    <td>{category}</td>
+                    <td>{target}</td>
+                    <td>{spent}</td>
+                    <td>{remaining}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        }
+
+        {pools.incomePool && 
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Budget</th>
+                <th>Spent</th>
+                <th>Net</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pools.incomePool.map(({ category, target, spent, remaining, }) => {
+                return (
+                  <tr key={category}>
+                    <td>{category}</td>
+                    <td>{target}</td>
+                    <td>{spent}</td>
+                    <td>{remaining}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        }
+      </Wrapper>
 
       {transactions.length 
         ? <TransactionTable transactions={transactions} onTableRowClick={onTableRowClickBreakdown}>
