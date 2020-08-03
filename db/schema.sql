@@ -22,3 +22,18 @@ year INTEGER,
 category VARCHAR(20),
 target FLOAT
 );
+
+CREATE TABLE networth (
+_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+userId INTEGER,
+year INTEGER,
+month INTEGER,
+day INTEGER,
+accountInstitution VARCHAR(40),
+accountName VARCHAR(40),
+accountBalance FLOAT,
+isAsset BOOLEAN,
+isRetirement BOOLEAN,
+isInvestment BOOLEAN,
+isHome BOOLEAN
+);

@@ -19,6 +19,9 @@ export default function Nav() {
         <li>
           <NavLink activeStyle={{fontWeight:'bold'}} to="/breakdown">Budget Breakdown</NavLink>
         </li>
+        <li>
+          <NavLink activeStyle={{fontWeight:'bold'}} to="/net-worth">Net Worth</NavLink>
+        </li>
       </ul>
     </nav>
   )

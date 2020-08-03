@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Breakdown from './components/breakdown/Breakdown'
+import Networth from './components/networth/Networth'
 import BulkAdd from './components/transactions/BulkAdd'
 import Nav from './components/nav/Nav'
 // import Snapshot from './components/snapshot/Snapshot'
@@ -124,6 +125,7 @@ function App() {
 
         <Route path="/add-transactions" component={BulkAdd} />
         <Route path="/breakdown" component={Breakdown} />
+        <Route path="/net-worth" component={Networth} />
         <Route path="/" component={Breakdown} exact />
 
 
