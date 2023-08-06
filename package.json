@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Project to move my current budget and net worth tracking into a  modern looking app with charts. Also to practice some backend  coding, since it has been a long time since I've touched it.",
   "main": "index.js",
+  "engines": {
+    "node": "12.x"
+  }
   "scripts": {
     "start": "node index.js",
     "heroku-postbuild": "cd client && yarn && yarn run build",
